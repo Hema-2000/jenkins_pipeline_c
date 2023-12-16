@@ -1,0 +1,189 @@
+//int arr
+#include <stdio.h>
+#define N 20
+int main() {
+    int size,ele,i,j;
+    int arr[N];
+    printf("enter the size of an array \n");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %d",&arr[i]);
+    }
+    printf("enter the element to delete:");
+    scanf("%d",&ele);
+    for(i=0;i<size;i++)
+    {
+        if(arr[i]==ele)
+        {
+        for(j=i;j<size-1;j++)
+        {
+           arr[j]=arr[j+1] ;
+        }
+         size--;
+         i--;
+        break;
+        }
+    }
+    printf("elements in an array:\n");
+    for(i=0;i<size;i++)
+    {
+    printf("%d ",arr[i]);
+    }
+        return 0;
+}
+
+
+//float arr
+#include <stdio.h>
+#define N 20
+int main() {
+    int size,i,j;
+    float ele;
+    float arr[N];
+    printf("enter the size of an array \n");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %f",&arr[i]);
+    }
+    printf("enter the element to delete:");
+    scanf("%f",&ele);
+    for(i=0;i<size;i++)
+    {
+        if(arr[i]==ele)
+        {
+        for(j=i;j<size-1;j++)
+        {
+           arr[j]=arr[j+1] ;
+        }
+         size--;
+         i--;
+        break;
+        }
+    }
+    printf("elements in an array:\n");
+    for(i=0;i<size;i++)
+    {
+    printf("%.2f ",arr[i]);
+    }
+        return 0;
+}
+
+
+//char arr
+#include <stdio.h>
+#define N 20
+int main() {
+    int size,i,j;
+    char ele;
+    char arr[N];
+    printf("enter the size of an array \n");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",&arr[i]);
+    }
+    printf("enter the element to delete:");
+    scanf(" %c",&ele);
+    for(i=0;i<size;i++)
+    {
+        if(arr[i]==ele)
+        {
+        for(j=i;j<size-1;j++)
+        {
+           arr[j]=arr[j+1] ;
+        }
+         size--;
+         i--;
+        break;
+        }
+    }
+    printf("elements in an array:\n");
+    for(i=0;i<size;i++)
+    {
+    printf("%c ",arr[i]);
+    }
+        return 0;
+}
+
+
+// using pointers
+#include <stdio.h>
+#define N 20
+int main() {
+    char arr[N];
+    char ele;
+    char *ptr=arr;
+    int size,i,j;
+    printf("enter the size of an array:");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",ptr+i);
+    }
+    printf("enter the element to delete:");
+    scanf(" %c",&ele);
+    for(i=0;i<size;i++)
+    {
+        if(arr[i]==ele)
+        {
+        for(j=i;j<size-1;j++)
+        {
+           arr[j]=arr[j+1] ;
+        }
+         size--;
+         i--;
+        break;
+        }
+    }
+    printf("elements in an array:");
+    for(i=0;i<size;i++)
+    {
+    printf("%c ",*(ptr+i));
+    }
+        return 0;
+}
+
+// using dynamic memory allocation
+
+
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+    int size,i,j,ele;
+    printf("enter the size of an array:");
+    scanf("%d",&size);
+    int *arr=(int*)malloc(sizeof(int)*size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    printf("enter the element to delete:");
+    scanf(" %d",&ele);
+    for(i=0;i<size;i++)
+    {
+        if(arr[i]==ele)
+        {
+        for(j=i;j<size-1;j++)
+        {
+           arr[j]=arr[j+1] ;
+        }
+         size--;
+         i--;
+        break;
+        }
+    }
+    printf("elements in an array:");
+    for(i=0;i<size;i++)
+    {
+    printf("%d ",arr[i]);
+    }
+    free(arr);
+        return 0;
+}
