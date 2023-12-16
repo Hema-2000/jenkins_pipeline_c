@@ -1,0 +1,95 @@
+// float array to delete using memory allocation
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+    int size,i;
+    printf("enter the size of an array:");
+    scanf("%d",&size);
+    float *arr=(float*)calloc(sizeof(float),size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf("%f",&arr[i]);
+    }
+    printf("elements in an array:");
+    for(i=0;i<size;i++)
+    {
+    printf("%.2f ",arr[i]);
+    }
+    free(arr);
+    for(i=0;i<size;i++)
+    {
+    printf("%.2f ",arr[i]);
+    }
+        return 0;
+}
+
+
+// int array to delete using memory allocation
+#include <stdio.h>
+#include <stdlib.h>
+#define N 20
+int main() {
+    int size,i;
+    printf("enter the size of an array:");
+    scanf("%d",&size);
+    int *arr=(int*)malloc(sizeof(int)*size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    printf("elements in an array:");
+    for(i=0;i<size;i++)
+    {
+    printf("%d ",arr[i]);
+    }
+    free(arr);
+    for(i=0;i<size;i++)
+    {
+    printf("%d ",arr[i]);
+    }
+        return 0;
+}
+
+
+// char array to delete using memory allocation
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+    int size,i;
+    printf("enter the size of an array:");
+    scanf("%d",&size);
+    char *arr=(char*)calloc(sizeof(char),size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",&arr[i]);
+    }
+    printf("elements in an array:");
+    for(i=0;i<size;i++)
+    {
+    printf("%c ",arr[i]);
+    }
+    int new_size;
+    printf("\nenter the newsize of an array:");
+    scanf("%d",&new_size);
+    arr=(char*)realloc(arr,sizeof(char)*new_size);
+    printf("\nenter the remaining array elements");
+    for(i=0;i<new_size;i++)
+    {
+        scanf(" %c",&arr[i]);
+    }
+    printf("elements in an array:");
+    for(i=0;i<new_size;i++)
+    {
+    printf("%c ",arr[i]);
+    }
+    free(arr);
+    for(i=0;i<new_size;i++)
+    {
+    printf("%c ",arr[i]);
+    }
+        return 0;
+}
+         
