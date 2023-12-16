@@ -13,9 +13,9 @@ int main() {
     {
         scanf("%d",&arr[i]);
     }
-    for(i=size;i>=pos-1;i--)
+    for(j=size;j>=pos-1;j--)
     {
-       arr[i]=arr[i-1];
+       arr[j]=arr[j-1];
     }
     arr[pos-1]=ele;
     printf("elements in an array:\n");
@@ -42,9 +42,9 @@ int main() {
     {
         scanf("%f",&arr[i]);
     }
-    for(i=size;i>=pos-1;i--)
+    for(j=size;j>=pos-1;j--)
     {
-       arr[i]=arr[i-1];
+       arr[j]=arr[j-1];
     }
     arr[pos-1]=ele;
     printf("elements in an array:\n");
@@ -70,9 +70,9 @@ int main() {
     {
         scanf(" %c",&arr[i]);
     }
-    for(i=size;i>=pos-1;i--)
+    for(j=size;j>=pos-1;j--)
     {
-       arr[i]=arr[i-1];
+       arr[j]=arr[j-1];
     }
     arr[pos-1]=ele;
     printf("elements in an array:\n");
@@ -100,9 +100,9 @@ int main() {
     {
         scanf(" %c",ptr+i);
     }
-    for(i=size;i>=pos-1;i--)
+    for(j=size;j>=pos-1;j--)
     {
-       ptr[i]=ptr[i-1];
+       ptr[j]=ptr[j-1];
     }
     ptr[pos-1]=ele;
     printf("elements in an array:\n");
@@ -132,9 +132,9 @@ int main() {
     }
     printf("enter the pos and ele:");
     scanf("%d %d",&pos,&ele);
-    for(i=size;i>=pos-1;i--)
+    for(j=size;j>=pos-1;j--)
     {
-       arr[i]=arr[i-1];
+       arr[j]=arr[j-1];
     }
     arr[pos-1]=ele;
     printf("elements in an array:");
