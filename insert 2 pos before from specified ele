@@ -1,0 +1,240 @@
+//1d using int arr
+#include <stdio.h>
+#define N 20
+int main() {
+    int arr[N],i,j;
+    int size,ins,ele,p;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    printf("enter the element in an array ");
+    scanf("%d",&ele);
+    printf("element to insert before the specified element");
+    scanf("%d",&ins);
+    for(i=0;i<size;i++)
+    {
+       if(arr[i]==ele)
+       {   
+           if(i>1)
+         {
+           p=i-2;
+           for(j=size;j>p;j--)
+           {
+           arr[j]=arr[j-1];
+           }
+           arr[p]=ins;
+           size++;
+           break;
+         }
+         else
+          printf("u entered element is there in arr but not suitable to insert before 2 positions");
+       }
+       
+    }
+    printf("\nelements in an array:\n");
+    for(i=0;i<size;i++) 
+    {
+        printf("%d ",arr[i]);
+    }
+}
+
+
+
+
+
+    #1d using float arr
+    #include <stdio.h>
+#define N 20
+int main() {
+    float arr[N],ins,ele;
+    int size,p,i,j;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf("%f",&arr[i]);
+    }
+    printf("enter the element in an array ");
+    scanf("%f",&ele);
+    printf("element to insert before the specified element");
+    scanf("%f",&ins);
+    for(i=0;i<size;i++)
+    {
+       if(arr[i]==ele)
+       {   
+           if(i>1)
+         {
+           p=i-2;
+           for(j=size;j>p;j--)
+           {
+           arr[j]=arr[j-1];
+           }
+           arr[p]=ins;
+           size++;
+           break;
+         }
+         else
+          printf("u entered element is there in arr but not suitable to insert before 2 positions");
+       }
+       
+    }
+    printf("\nelements in an array:\n");
+    for(i=0;i<size;i++) 
+    {
+        printf("%f ",arr[i]);
+    }
+}
+
+
+
+
+    //1d using char arr
+    #include <stdio.h>
+#define N 20
+int main() {
+    char arr[N],ins,ele;
+    int size,p,i,j;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",&arr[i]);
+    }
+    printf("enter the element in an array ");
+    scanf(" %c",&ele);
+    printf("element to insert before the specified element");
+    scanf(" %c",&ins);
+    for(i=0;i<size;i++)
+    {
+       if(arr[i]==ele)
+       {   
+           if(i>1)
+         {
+           p=i-2;
+           for(j=size;j>p;j--)
+           {
+           arr[j]=arr[j-1];
+           }
+           arr[p]=ins;
+           size++;
+           break;
+         }
+         else
+          printf("u entered element is there in arr but not suitable to insert before 2 positions");
+       }
+       
+    }
+    printf("\nelements in an array:\n");
+    for(i=0;i<size;i++) 
+    {
+        printf(" %c ",arr[i]);
+    }
+}
+
+
+
+
+
+    //1d using pointers
+    #include <stdio.h>
+#define N 20
+int main() {
+    char arr[N],ins,ele;
+    char *ptr=arr;
+    int size,p,i,j;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",ptr+i);
+    }
+    printf("enter the element in an array ");
+    scanf(" %c",&ele);
+    printf("element to insert before the specified element");
+    scanf(" %c",&ins);
+    for(i=0;i<size;i++)
+    {
+       if(ptr[i]==ele)
+       {   
+           if(i>1)
+         {
+           p=i-2;
+           for(j=size;j>p;j--)
+           {
+           ptr[j]=ptr[j-1];
+           }
+           ptr[p]=ins;
+           size++;
+           break;
+         }
+         else
+          printf("u entered element is there in arr but not suitable to insert before 2 positions");
+       }
+       
+    }
+    printf("\nelements in an array:\n");
+    for(i=0;i<size;i++) 
+    {
+        printf(" %c ",*(ptr+i));
+    }
+}
+
+
+
+
+    //1d using memory allocation
+
+    #include <stdio.h>
+#include <stdlib.h>
+#define N 20
+int main() {
+    char ele,ins;
+    int size,p,i,j;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    char *arr = (char*)malloc(sizeof(char)*size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",&arr[i]);
+    }
+    printf("enter the element in an array ");
+    scanf(" %c",&ele);
+    printf("element to insert before the specified element");
+    scanf(" %c",&ins);
+    for(i=0;i<size;i++)
+    {
+       if(arr[i]==ele)
+       {   
+           if(i>1)
+         {
+           p=i-2;
+           for(j=size;j>p;j--)
+           {
+           arr[j]=arr[j-1];
+           }
+           arr[p]=ins;
+           size++;
+           break;
+         }
+         else
+          printf("u entered element is there in arr but not suitable to insert before 2 positions");
+       }
+       
+    }
+    printf("\nelements in an array:\n");
+    for(i=0;i<size;i++) 
+    {
+        printf(" %c ",arr[i]);
+    }
+    free(arr);
+}
+
+    
