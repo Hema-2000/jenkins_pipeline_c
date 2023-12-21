@@ -1,0 +1,159 @@
+//1d using int arr
+
+#include <stdio.h>
+#define N 20
+int main() {
+    int arr[N],i,j,temp,size;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if (arr[i]>arr[j])
+            {
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+    printf("elements in an array after sorting in ascending order:\n");
+    for(i=0;i<size;i++)
+    printf("%d ",arr[i]);
+}
+
+
+
+//1d using float arr
+#include <stdio.h>
+#define N 20
+int main() {
+    float arr[N],temp;
+    int i,j,size;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf("%f",&arr[i]);
+    }
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if (arr[i]>arr[j])
+            {
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+    printf("elements in an array after sorting in ascending order:\n");
+    for(i=0;i<size;i++)
+    printf("%f ",arr[i]);
+}
+
+
+
+//1d using char arr
+#include <stdio.h>
+#define N 20
+int main() {
+    char arr[N],temp;
+    int i,j,size;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",&arr[i]);
+    }
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if (arr[i]>arr[j])
+            {
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+    printf("elements in an array after sorting in ascending order:\n");
+    for(i=0;i<size;i++)
+    printf(" %c ",arr[i]);
+}
+
+
+//id using memory allocations
+#include <stdio.h>
+#include<stdlib.h>
+#define N 20
+int main() {
+    char *arr,temp;
+    int i,j,size;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    arr=(char *)malloc(sizeof(char)*size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",&arr[i]);
+    }
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if (arr[i]>arr[j])
+            {
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+    printf("elements in an array after sorting in ascending order:\n");
+    for(i=0;i<size;i++)
+    printf(" %c ",arr[i]);
+}
+
+
+//1d using pointers
+#include <stdio.h>
+#define N 20
+int main() {
+    char arr[N],temp;
+    char *ptr=arr;
+    int i,j,size;
+    printf("enter the size of an array");
+    scanf("%d",&size);
+    printf("enter the array elements");
+    for(i=0;i<size;i++)
+    {
+        scanf(" %c",ptr+i);
+    }
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if (ptr[i]>ptr[j])
+            {
+                temp=ptr[i];
+                ptr[i]=ptr[j];
+                ptr[j]=temp;
+            }
+        }
+    }
+    printf("elements in an array after sorting in ascending order:\n");
+    for(i=0;i<size;i++)
+    printf(" %c ",*(ptr+i));
+}
+
