@@ -1,0 +1,175 @@
+//using env variables
+
+pipeline {
+    agent { label "label1" }
+    environment{
+        myname="hema" 
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                sh "echo 'my name is $myname' "
+            }
+        }
+        stage("stage1") {
+            steps {
+                echo env.myname
+            }
+        }
+    }
+}
+
+
+//local and global env variables
+pipeline {
+    agent { label "label1" }
+    environment{
+        myname="hema"       //global variable
+    }
+    stages {
+        stage("stage1") {
+            environment{
+                myname="latha"       //local variable
+            }
+            steps {
+                sh "echo 'my name is $myname' "
+            }
+        }
+        stage("stage1") {
+            agent any
+            steps {
+                echo env.myname
+            }
+        }
+    }
+}
+
+
+//using parameters
+
+pipeline {
+    agent { label "label1" }
+    parameters{
+        string(name:"person",defaultValue:"hema",description:"enter the name")
+        text(name:"biography",defaultValue:"",description:"enter the biography")
+        booleanParam(name:"toggle",defaultValue:"true",description:"enter the toggle value")
+        choice(name:"CHOICE",defaultValue:["1","2","3"],description:"enter the choice")
+        password(name:"pwd",defaultValue:"no_password",description:"enter the password")
+        file(name:"file_prop",description:"enter the file name")
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                echo "hello ${params.person}"
+                echo "biography ${params.biography}"
+                echo "boolean option ${params.toggle}"
+                echo "choice: ${params.CHOICE}"
+                echo "password ${params.pwd}" 
+                echo "filename ${params.file_prop}"
+            }
+        }
+    }
+}
+
+
+//option block
+
+pipeline {
+    agent { label "label1" }
+    options { 
+        buildDiscarder(logRotator(numToKeepStr: '5')) 
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                echo "first job"
+            }
+        }
+    }
+}
+
+
+//retry option
+
+pipeline {
+    agent { label "label1" }
+    options { 
+        retry(3) 
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                sh "echo hello"
+            }
+        }
+     stages {
+        stage("stage2") {
+            steps {
+                sh "sleep 10;exit 1"
+            }
+        }
+    }
+}
+
+
+//timeout option
+pipeline {
+    agent { label "label1" }
+    options { 
+      timeout(time:5,unit:"SECONDS" )
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                sh "sleep 10"
+            }
+        }
+    }
+}
+
+
+
+//timestamp options
+
+pipeline {
+    agent { label "label1" }
+    options { 
+        timestamps()
+      timeout(time:15,unit:"SECONDS") 
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                sh "sleep 10"
+            }
+        }
+        stage("stage2") {
+            steps {
+                sh "sleep 10"
+            }
+        }
+    }
+}
+
+
+//disableconcurrentbuilds option
+pipeline {
+    agent { label "label1" }
+    options { 
+        disableConcurrentBuilds()
+        timestamps()
+        timeout(time:25,unit:"SECONDS") 
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                sh "sleep 10"
+            }
+        }
+        stage("stage2") {
+            steps {
+                sh "sleep 10"
+            }
+        }
+    }
+}
