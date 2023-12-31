@@ -1,0 +1,53 @@
+//always option for entire pipeline
+pipeline {
+    agent { label "label1" }
+    stages {
+        stage("stage1") {
+            steps {
+                echo "2nd stage"
+            }
+        }
+        stage("stage2") {
+            steps {
+                echo "2nd stage"
+            }
+        }
+    }    
+    post {
+        always {
+            echo "post build actions"
+        }
+    }
+    
+}
+
+
+
+//always option for individual stages
+pipeline {
+    agent { label "label1" }
+    stages {
+        stage("stage1") {
+            steps {
+                echo "2nd stage"
+            }
+            post {
+                always {
+                    echo "post build actions"
+                }
+            }
+        }
+        stage("stage2") {
+            steps {
+                echo "2nd stage"
+            }
+            post {
+                always {
+                    echo "post build actions"
+                }
+            }
+        }
+    }   
+    
+}
+
