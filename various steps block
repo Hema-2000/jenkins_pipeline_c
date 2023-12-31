@@ -1,0 +1,245 @@
+//using git hub repo
+pipeline {
+    agent { label "label1" }
+    triggers{
+        upstream(upstreamProjects:'scm_job1',threshold:hudson.model.Result.SUCCESS)
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                sh "echo 'hello' "
+            }
+        }
+        stage("stage2") {
+            steps {
+                git changelog: false, credentialsId: 'server1', poll: false, url: 'https://github.com/ch-hemalatha/repo'
+                sh 'ls'
+            }
+        }
+    }
+}
+
+
+//1st job executes then only it executes 2nd job
+pipeline {
+    agent { label "label1" }
+
+    stages {
+        stage("stage1") {
+            steps {
+                echo "1st job starts"
+                build 'scm_job1'
+                echo "1st job completed"
+            }
+        }
+        stage("stage2") {
+            steps {
+               echo "running"
+            }
+        }
+    }
+}
+
+
+
+//2st job executes if 1st job will not execute
+pipeline {
+    agent { label "label1" }
+
+    stages {
+        stage("stage1") {
+            steps {
+                echo "1st job starts"
+                build job:'scm_job1' , wait:false
+                echo "1st job completed"
+            }
+        }
+        stage("stage2") {
+            steps {
+               echo "running"
+               sleep 30
+            }
+        }
+    }
+}
+
+
+
+//creating new directory
+pipeline {
+    agent { label "label1" }
+
+    stages {
+        stage("stage1") {
+            steps {
+               sh 'mkdir dir1'  //this directory will be created in jenkins workspace
+              dir('/tmp/lenkins/'){     //this will be created in new directory
+                   sh 'mkdir dir2'
+               }
+               sh 'mkdir dir3'  //this directory will be created in jenkins workspace
+            }
+        }
+    }
+}
+
+
+//catcherror block
+pipeline {
+    agent { label "label1" }
+
+    stages {
+        stage("stage1") {
+            steps {
+                //if we comment out below line then entire build will not trigger
+                //if we uncomment below line then stage1 failes it thoroughs error msg and it buils stage2 as well
+                //catchError(buildResult: 'UNSTABLE', message: 'Error', stageResult: 'FAILURE'){
+                    sh "exit 1"
+                }
+            }
+        }
+          stage("stage2") {
+            steps {
+                echo "this is 2nd stage"
+            }
+        }
+    }
+}
+
+
+
+
+//based on when condition,env variables
+pipeline {
+    agent { label "label1" }
+    environment { deploy_to = "dep"}
+    stages {
+        stage("stage1") {
+            when {
+               environment name: "deploy_to",value:"dep"
+            }
+            steps {
+                echo "1st job starts"
+            }
+        }
+        stage("stage2") {
+            when {
+               environment name: "production",value:"pro"
+            }
+            steps {
+               echo "2nd jobrunning"
+            }
+        }
+    }
+}
+
+
+
+//when condition based on boolean parameters
+pipeline {
+    agent { label "label1" }
+    parameters { 
+      booleanParam(name:"toggle",defaultValue:false,description:"toggle this value") 
+      //if it is true means build normally, false means it wont build
+    }
+    stages {
+        stage("stage1") {
+            when {
+               expression{return params.toggle}
+            }
+            steps {
+                echo "1st job starts"
+            }
+        }
+    }
+}
+
+
+//when condition based on string parameters
+pipeline {
+    agent { label "label1" }
+    parameters { 
+        string(name:"person",defaultValue:"hema",description:"who r u?")
+    }
+    stages {
+        stage("stage1") {
+            when {
+               equals expected:"hemalatha",actual:params.person  
+            }
+            steps {
+                echo "hi hemalatha"
+            }
+        }
+    }
+}
+//same as above script b ut opposite condition is string are not equal then stage got executed
+pipeline {
+    agent { label "label1" }
+    parameters { 
+        string(name:"person",defaultValue:"hema",description:"who r u?")
+    }
+    stages {
+        stage("stage1") {
+            when {
+               not{equals expected:"hemalatha",actual:params.person}
+            }
+            steps {
+                echo "hi hemalatha"
+            }
+        }
+    }
+}
+
+
+
+//allOf option
+pipeline {
+    agent { label "label1" }
+    parameters { 
+        string(name:"person",defaultValue:"hema",description:"who r u?")
+        booleanParam(name:"toggle",defaultValue:false,description:"toggle this value") 
+    }
+    stages {
+        stage("stage1") {
+            when {
+                allOf{
+                    equals expected:"hemalatha",actual:params.person
+                    expression{return params.toggle}
+                }
+            }
+            steps {
+                echo "hi hemalatha"
+            }
+        }
+    }
+}
+
+
+//anyOf option
+pipeline {
+    agent { label "label1" }
+    parameters { 
+        string(name:"person",defaultValue:"hema",description:"who r u?")
+        booleanParam(name:"toggle",defaultValue:false,description:"toggle this value") 
+    }
+    stages {
+        stage("stage1") {
+            when {
+                anyOf{
+                    equals expected:"hemalatha",actual:params.person
+                    expression{return params.toggle}
+                }
+            }
+            steps {
+                echo "hi hemalatha"
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
