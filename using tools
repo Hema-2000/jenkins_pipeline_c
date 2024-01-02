@@ -1,0 +1,23 @@
+pipeline {
+    agent any 
+    tools {
+        maven 'Maven_AutoInstaller'    //maven tool is installed from manage jenkins
+    }
+    stages {
+        stage ("maven") {
+            steps {
+                echo "Hello !!, welcome to Tools section"
+                sh 'mvn --version'         //it prints the version of mv
+            }
+        }
+        stage ('NewMaven') {
+            tools {
+                jdk 'JDK17'            //jdk tool is configured
+            }
+            steps {
+                echo "printing other maven with custom jdk"
+                sh "mvn --version"
+            }
+        }
+    }
+}
