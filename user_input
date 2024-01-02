@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage ('Build') {
+            steps {
+                timeout (time: 300, unit: 'SECONDS') {
+                    input message: "Do you like to build", ok: "yes", submitter: 'maha'
+                    //it asks the user input execution will be paused until user gives input user can select yes or abort
+                    //submitter details also displayed
+                } //abort
+                echo "Building the application"
+            }
+        }
+    }
+}
