@@ -51,3 +51,22 @@ pipeline {
     
 }
 
+
+
+pipeline {
+    agent any
+    stages {
+        stage ('Build') {
+            steps {
+                echo "Building!!!!"
+            }
+        }
+    }
+    post {
+        changed {  //post build actions..... when new commit pulled in then the steps within changed block got executed
+            echo "Post build ===> Changed is called "
+        }
+    }
+}
+
+
