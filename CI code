@@ -1,0 +1,43 @@
+pipeline {
+    agent none
+    options {
+        timeout(time: 1,unit:"HOURS") 
+        //if any part of pipeline exceeds 1 hr for execution then job gets aborted
+    }
+
+    stages {
+        stage('checkout') {
+            agent{label "label1"}
+            steps {
+                //checkout the git repo
+                git credentialsId: 'token1', url: 'https://github.com/ch-hemalatha/hello-maven.git'
+            }
+        }
+        stage('validate'){
+            agent any
+            when {
+                anyOf{
+                    //to get any new changes within below files
+                    changeset "pom.xml/**"
+                    changeset "file1/**"
+                }
+            }
+            steps {
+                script {
+                    env.BUILDME = "yes"  //set env variable to further build stages
+                }
+                
+            }
+        }
+        //this stage is used to check whether validation status 
+        stage('build') {
+            when{environment name : "BUILDME", value: "yes"}
+            agent any
+            steps{
+                echo "BUILD"
+            }
+        }
+    }
+}
+
+
