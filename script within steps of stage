@@ -1,0 +1,23 @@
+pipeline {
+    agent { label "label1" }
+    stages {
+        stage("stage1") {
+            steps {
+                echo "1st stage"
+            }
+        }
+        stage("stage2") {
+            steps {
+                script {
+                    def coarse = "english"
+                    if (coarse =="english") {
+                        println("thanks for enrolling")
+                    }
+                    else
+                        println("do enroll")
+                }
+            }
+        }
+    }   
+    
+}
