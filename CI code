@@ -41,3 +41,67 @@ pipeline {
 }
 
 
+
+
+                                  (or)
+
+
+
+pipeline {
+    agent none
+    options {
+        timeout(time: 1, unit: "HOURS") 
+        // If any part of the pipeline exceeds 1 hr for execution, the job gets aborted
+    }
+
+    parameters {
+        booleanParam(name: 'UNITTEST', defaultValue: true, description: 'Enable unittest?')
+    }
+
+    stages {
+        stage('checkout') {
+            agent { label "label1" }
+            steps {
+                // Checkout the git repo
+                git credentialsId: 'token1', url: 'https://github.com/ch-hemalatha/hello-maven.git'
+            }
+        }
+        stage('validate') {
+            agent any
+            when {
+                anyOf {
+                    // To get any new changes within below files
+                    changeset "C:/Users/dell/Documents/**"
+                    changeset "src/main/java/com/sivaacademy/devops/**"
+                }
+            }
+            steps {
+                script {
+                    env.BUILDME = "yes"  // Set env variable to further build stages
+                }
+            }
+        }
+        // This stage is used to check whether validation status 
+        stage('build') {
+            when { expression { env.BUILDME == 'yes' } }
+            agent any
+            steps {
+                script {
+                        if (params.UNITTEST) {
+                            unitstr = ""
+                        } else {
+                            unitstr = "-Dmaven.test.skip=true"
+                        }
+                        echo "CI_CODE changing within doc folder"
+                        dir("C:/Users/dell/Documents/") {
+                            sh "mvn clean package ${unitstr}"
+                        }
+                        echo "utils.java changing within devops folder"
+                        dir("src/main/java/com/sivaacademy/devops/") {
+                            sh "mvn clean package"
+                        }
+                }
+            }
+        }
+    }
+}
